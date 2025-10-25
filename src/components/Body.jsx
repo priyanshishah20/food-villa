@@ -2,7 +2,7 @@ import React from 'react'
 import FoodCards from './Content/RestaurantList'
 import ConfigRenderer from './Content/ConfigRender'
 
-const RestaurantDisplay = () => {
+const Body = () => {
   return (
     <>
       <ConfigRenderer  />
@@ -10,4 +10,4 @@ const RestaurantDisplay = () => {
   )
 }
 
-export default RestaurantDisplay
+export default Body

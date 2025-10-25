@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SkeletonRestCard } from './SkeletonEffect.jsx';
+import { FaStar } from "react-icons/fa";
+import { ratings } from '../../utils/ratings.js';
+
 
 const RestaurantList = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -16,6 +19,7 @@ const RestaurantList = () => {
         'https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.2799611&lng=72.862751&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
       );
       const json = await data.json();
+      console.log(json);
 
       // ✅ Find the card that actually contains restaurant data
       const cards = json?.data?.cards || [];
@@ -54,22 +58,16 @@ const RestaurantList = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <div className="search-container" style={{ marginBottom: '20px' }}>
         <input
           type="text"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Search for restaurants or cuisines..."
-          style={{
-            padding: '10px',
-            borderRadius: '8px',
-            border: '1px solid #ccc',
-            width: '250px',
-            marginRight: '10px',
-          }}
+          className='text-sm py-2 px-3 mr-3 rounded-md border border-gray-300 focus:outline-none w-64'
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch} className='text-sm py-2 px-3 inline-block bg-[#333] text-white rounded-md'>Search</button>
       </div>
 
       {restaurants.length === 0 ? ( //restaurants.length === 0 ?
@@ -77,26 +75,30 @@ const RestaurantList = () => {
       ) : filteredRestaurants.length === 0 ? (
         <h4>No restaurants match your filter</h4>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        <div className='grid grid-cols-3 gap-6'>
           {filteredRestaurants.map((res) => (
             <div key={res.id}
-              style={{
-                border: '1px solid #ccc',
-                padding: '10px',
-                borderRadius: '8px',
-                textAlign: 'center',
-              }}
-              // onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-              // onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+              className='border border-transparent hover:border-gray-100 p-3 rounded-xl space-y-1 
+              hover:shadow-[0_8px_24px_rgba(149,157,165,0.2)]'
             >
               <img
                 src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${res.cloudinaryImageId}`}
-                alt={res.name}
-                style={{ width: '100%', height: '200px', objectFit: 'cover' }}  
+                alt={res.name} className='rounded-xl h-[250px] w-full mb-3' 
               />
-              <h3>{res.name}</h3>
-              <p>{res.cuisines?.join(', ')}</p>
-              <h4>{res.avgRating} ⭐</h4>
+              <div className='flex items-center justify-between'>
+                <h3 className='font-semibold'>{res.name}</h3>
+                <div className={`flex items-center ${ratings(res.avgRating)} rounded-sm text-white py-0.5 px-1`}>
+                  <p className='text-xs font-semibold pr-1'>{res.avgRating}</p> <FaStar size={10} />
+                </div>
+              </div>
+              <div className='flex items-center justify-between text-[13px] text-gray-500'>
+                <p>{res.cuisines?.join(', ')}</p>
+                <p>{res.costForTwo}</p>
+              </div>
+              <div className='flex items-center justify-between text-gray-400 font-normal'>
+                <p className='text-[13px]'>{res.areaName}</p>
+                <p className='text-[12px] text-gray-600 font-semibold'>{res.sla.lastMileTravelString}</p>
+              </div>
             </div>
           ))}
         </div>

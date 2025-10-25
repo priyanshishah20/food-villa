@@ -5,7 +5,7 @@ import RestaurantList from './RestaurantList';
 
 const ConfigRenderer = () => {
   return (
-    <div>
+    <div className='pt-[4.375rem] px-[4.5rem]'>
       {config.map((section, idx) => {
         switch (section.type) {
           case "carousel":
