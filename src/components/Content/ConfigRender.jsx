@@ -5,11 +5,11 @@ import RestaurantList from './RestaurantList';
 
 const ConfigRenderer = () => {
   return (
-    <div className='pt-[4.375rem] px-[4.5rem]'>
+    <div className='pt-[5.375rem] px-[4.5rem]'>
       {config.map((section, idx) => {
         switch (section.type) {
-          case "carousel":
-            return <Carousel key={idx} cards={section.cards} />;
+          // case "carousel":
+            // return <Carousel key={idx} cards={section.cards} />;
           case "restaurantList":
             return <RestaurantList key={idx} cards={section.cards} />;
           default:

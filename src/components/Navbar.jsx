@@ -16,7 +16,7 @@ const Navbar = () => {
             </ul>
         </div>
         <div>
-          {loggedIn ? <button onClick={() => setLoggedIn(false)}>Logout</button> : <button onClick={() => setLoggedIn(true)} className='login-btn'>Login</button>}
+          {loggedIn ? <button onClick={() => setLoggedIn(false)} className='login-btn'>Logout</button> : <button onClick={() => setLoggedIn(true)} className='login-btn'>Login</button>}
         </div>
     </div>
     </>
