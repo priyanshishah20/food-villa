@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(false); 
@@ -9,10 +10,10 @@ const Navbar = () => {
         <div className='logo'>Food Villa</div>
         <div className='nav-items'>
             <ul>
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Contact Us</li>
-                <li>Cart</li>
+                <Link to='/'><li>Home</li></Link>
+                <Link to="/about"><li>About Us</li></Link>
+                <Link to='/contact'><li>Contact</li></Link>
+                <Link to='/cart'><li>Cart</li></Link>
             </ul>
         </div>
         <div>
